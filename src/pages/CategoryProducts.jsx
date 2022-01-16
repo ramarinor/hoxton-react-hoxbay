@@ -4,6 +4,7 @@ import ProductItem from "../components/ProductItem";
 
 function CategoryProducts() {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
   const params = useParams();
 
   useEffect(() => {
@@ -13,10 +14,21 @@ function CategoryProducts() {
   }, []);
   return (
     <div className="products-container">
+      <input
+        type="search"
+        placeholder="Search Products"
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+      />
       <ul className="products-container__list">
-        {products.map((product) => (
-          <ProductItem product={product} key={product.id} />
-        ))}
+        {products
+          .filter((product) =>
+            product.title.toLowerCase().includes(search.toLocaleLowerCase())
+          )
+          .map((product) => (
+            <ProductItem product={product} key={product.id} />
+          ))}
       </ul>
     </div>
   );

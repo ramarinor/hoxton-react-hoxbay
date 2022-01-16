@@ -29,10 +29,8 @@ function ProductDetails({ addItemToBasket }) {
           <h2>{product.title}</h2>
           <p>{product.description}</p>
           <p>£{product.price}</p>
-          <Link to="/basket">
-            <button onClick={() => addItemToBasket(product)}>
-              Add to basket
-            </button>
+          <Link to="/basket" onClick={() => addItemToBasket(product)}>
+            <button>Add to basket</button>
           </Link>
         </div>
       </section>
