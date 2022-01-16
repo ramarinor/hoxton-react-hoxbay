@@ -1,22 +1,19 @@
-import { Link } from 'react-router-dom'
+import BasketItem from "../components/BasketItem";
 
-function Basket () {
-  // fetch basket
-
+function Basket({ basket }) {
   return (
-    <div>
-      <h1>Basket</h1>
-
-      <ul>
-        <li>
-          <Link to='/products/1'>Basket item 1</Link>
-        </li>
-        <li>
-          <Link to='/products21'>Basket item 2</Link>
-        </li>
-      </ul>
-    </div>
-  )
+    <main>
+      <section className="basket-container">
+        <h2>Your Basket</h2>
+        <ul>
+          {basket.map((basketItem) => (
+            <BasketItem basketItem={basketItem} key={basketItem.id} />
+          ))}
+        </ul>
+        <h3>Your total: £109.95</h3>
+      </section>
+    </main>
+  );
 }
 
-export default Basket
+export default Basket;
