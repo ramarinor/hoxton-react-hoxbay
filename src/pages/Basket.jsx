@@ -1,6 +1,13 @@
 import BasketItem from "../components/BasketItem";
 
 function Basket({ basket }) {
+  function calculateTotal() {
+    let total = 0;
+    for (const basketItem of basket) {
+      total += basketItem.quantity * basketItem.price;
+    }
+    return total.toFixed(2);
+  }
   return (
     <main>
       <section className="basket-container">
@@ -10,7 +17,7 @@ function Basket({ basket }) {
             <BasketItem basketItem={basketItem} key={basketItem.id} />
           ))}
         </ul>
-        <h3>Your total: £109.95</h3>
+        <h3>Your total: £{calculateTotal()}</h3>
       </section>
     </main>
   );
