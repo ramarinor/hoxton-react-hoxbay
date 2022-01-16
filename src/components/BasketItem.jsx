@@ -9,7 +9,7 @@ function BasketItem({ basketItem }) {
         </Link>
         <Link to={`/products/${basketItem.id}`}>
           <p>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</p>
-        </Link> 
+        </Link>
         <p>
           Qty:
           <select defaultValue={basketItem.quantity}>
@@ -19,7 +19,9 @@ function BasketItem({ basketItem }) {
             <option value={3}>3</option>
           </select>
         </p>
-        <p>Item total: £109.95</p>
+        <p>
+          Item total: £{(basketItem.quantity * basketItem.price).toFixed(2)}
+        </p>
       </article>
     </li>
   );
