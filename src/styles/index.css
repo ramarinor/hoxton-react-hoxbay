@@ -188,7 +188,7 @@ img {
 /* Categories */
 .categories-container {
   height: 100%;
-  margin: 0 auto;
+  margin: 3rem auto;
 }
 
 .categories-container__list {
@@ -215,7 +215,19 @@ img {
   border: 2px solid var(--random-colour);
   background-color: var(--white);
 }
+.category:nth-child(1) {
+  background-color: var(--blue);
+}
 
+.category:nth-child(2) {
+  background-color: var(--green);
+}
+.category:nth-child(3) {
+  background-color: var(--red);
+}
+.category:nth-child(4) {
+  background-color: var(--yellow);
+}
 /* Basket */
 
 .basket-container {

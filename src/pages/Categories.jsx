@@ -1,21 +1,24 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import Category from "../components/Category";
 
-function Categories () {
-  // fetch categories from server
-
+function Categories() {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/categories")
+      .then((resp) => resp.json())
+      .then((categoriesFromServer) => setCategories(categoriesFromServer));
+  }, []);
   return (
-    <div>
-      <h1>Categories</h1>
-      <ul>
-        <li>
-          <Link to='/categories/1'>Category 1</Link>
-        </li>
-        <li>
-          <Link to='/categories/2'>Category 2</Link>
-        </li>
-      </ul>
-    </div>
-  )
+    <main>
+      <section className="categories-container main-wrapper">
+        <ul className="categories-container__list">
+          {categories.map((category) => (
+            <Category category={category} key={category.id} />
+          ))}
+        </ul>
+      </section>
+    </main>
+  );
 }
 
-export default Categories
+export default Categories;
