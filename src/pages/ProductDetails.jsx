@@ -11,9 +11,6 @@ function ProductDetails() {
       .then((resp) => resp.json())
       .then((productFromServer) => setProduct(productFromServer));
   }, []);
-
-  console.log("Params", params);
-
   if (product === null) {
     return <main>Loading....</main>;
   }
