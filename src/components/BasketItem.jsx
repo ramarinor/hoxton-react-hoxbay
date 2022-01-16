@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function BasketItem({ basketItem }) {
+function BasketItem({ basketItem, setQuantityOfBasketItem }) {
   return (
     <li>
       <article className="basket-container__item">
@@ -12,11 +12,16 @@ function BasketItem({ basketItem }) {
         </Link>
         <p>
           Qty:
-          <select defaultValue={basketItem.quantity}>
-            <option value={0}>0</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
+          <select
+            defaultValue={basketItem.quantity}
+            onChange={(e) => {
+              setQuantityOfBasketItem(e, basketItem);
+            }}
+          >
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
           </select>
         </p>
         <p>

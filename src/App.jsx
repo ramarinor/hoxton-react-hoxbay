@@ -35,6 +35,34 @@ function App() {
     }
   ]);
 
+  function addItemToBasket(product) {
+    const updatedBasket = JSON.parse(JSON.stringify(basket));
+    const basketItemFound = updatedBasket.find(
+      (basketItem) => basketItem.id === product.id
+    );
+    if (basketItemFound) {
+      if (basketItemFound.quantity < 3) basketItemFound.quantity++;
+    } else {
+      const newBasketItem = { ...product, quantity: 1 };
+      updatedBasket.push(newBasketItem);
+    }
+    setBasket(updatedBasket);
+  }
+  function setQuantityOfBasketItem(e, basketItem) {
+    let updatedBasket = JSON.parse(JSON.stringify(basket));
+    const basketItemFound = updatedBasket.find(
+      (targetBasketItem) => targetBasketItem.id === basketItem.id
+    );
+    basketItemFound.quantity = Number(e.target.value);
+    if (basketItemFound.quantity === 0) {
+      console.log("deleting basket item");
+      updatedBasket = updatedBasket.filter(
+        (targetBasketItem) => targetBasketItem.id !== basketItem.id
+      );
+    }
+    setBasket(updatedBasket);
+  }
+
   return (
     <>
       <Header />
@@ -43,10 +71,21 @@ function App() {
         <Routes>
           <Route index element={<Navigate replace to="/products" />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route
+            path="/products/:id"
+            element={<ProductDetails addItemToBasket={addItemToBasket} />}
+          />
           <Route path="/categories" element={<Categories />} />
           <Route path="/categories/:id" element={<CategoryProducts />} />
-          <Route path="/basket" element={<Basket basket={basket} />} />
+          <Route
+            path="/basket"
+            element={
+              <Basket
+                basket={basket}
+                setQuantityOfBasketItem={setQuantityOfBasketItem}
+              />
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 
-function ProductDetails() {
+function ProductDetails({ addItemToBasket }) {
   const params = useParams();
   const [product, setProduct] = useState(null);
 
@@ -29,7 +29,11 @@ function ProductDetails() {
           <h2>{product.title}</h2>
           <p>{product.description}</p>
           <p>£{product.price}</p>
-          <button>Add to basket</button>
+          <Link to="/basket">
+            <button onClick={() => addItemToBasket(product)}>
+              Add to basket
+            </button>
+          </Link>
         </div>
       </section>
     </main>
