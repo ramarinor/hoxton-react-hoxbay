@@ -1,23 +1,22 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import ProductItem from "../components/ProductItem";
 
-function Products () {
-  // fetch products
+function Products() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/products")
+      .then((resp) => resp.json())
+      .then((productsFromServer) => setProducts(productsFromServer));
+  }, []);
   return (
-    <div>
-      <h1>Products</h1>
-      <ul>
-        <li>
-          <Link to='/products/1'>Product 1</Link>
-        </li>
-        <li>
-          <Link to='/products/2'>Product 2</Link>
-        </li>
-        <li>
-          <Link to='/products/3'>Product 3</Link>
-        </li>
+    <div className="products-container">
+      <ul className="products-container__list">
+        {products.map((product) => (
+          <ProductItem product={product} />
+        ))}
       </ul>
     </div>
-  )
+  );
 }
 
-export default Products
+export default Products;
